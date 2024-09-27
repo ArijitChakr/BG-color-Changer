@@ -31,13 +31,24 @@ function renderColor() {
 renderColor();
 
 formEl.addEventListener("submit", function (e) {
+  e.preventDefault();
   let colorButtonValue = colorbtn.value;
   let newColorValue = newColor.value.toLowerCase();
-  e.preventDefault();
-  console.log(colorButtonValue, newColorValue);
+
+  if (checkActualColor(newColorValue) === false) {
+    alert("Please enter proper color");
+    return;
+  }
   let btnName = document.querySelector(`.btn-${colorButtonValue}`);
   btnName.classList.add(`btn-${newColorValue}`);
   btnName.textContent = newColorValue[0].toUpperCase() + newColorValue.slice(1);
   renderColor();
   btnName.classList.remove(`btn-${colorButtonValue}`);
 });
+
+function checkActualColor(col) {
+  const st = new Option().style;
+  st.color = col;
+
+  return st.color === col;
+}
