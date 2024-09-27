@@ -44,6 +44,7 @@ formEl.addEventListener("submit", function (e) {
   btnName.textContent = newColorValue[0].toUpperCase() + newColorValue.slice(1);
   renderColor();
   btnName.classList.remove(`btn-${colorButtonValue}`);
+  newColor.value = "";
 });
 
 function checkActualColor(col) {
