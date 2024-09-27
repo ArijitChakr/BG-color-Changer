@@ -37,6 +37,7 @@ formEl.addEventListener("submit", function (e) {
 
   if (checkActualColor(newColorValue) === false) {
     alert("Please enter proper color");
+    newColor.value = "";
     return;
   }
   let btnName = document.querySelector(`.btn-${colorButtonValue}`);
