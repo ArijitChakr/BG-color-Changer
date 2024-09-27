@@ -1,7 +1,8 @@
 const allbtns = document.querySelectorAll(".btn");
 const formEl = document.querySelector("form");
-const colorbtn = document.getElementById("colors");
+const colorButton = document.getElementById("colors");
 const newColor = document.getElementById("new-color");
+const optionCol = document.querySelectorAll("option");
 
 function renderColor() {
   allbtns.forEach((btn) => {
@@ -27,17 +28,23 @@ function renderColor() {
       }
     });
   });
+  optionCol.forEach((opt, i) => {
+    opt.value =
+      allbtns[i].textContent[0].toLowerCase() + allbtns[i].textContent.slice(1);
+    opt.textContent = allbtns[i].textContent;
+  });
 }
 renderColor();
 
 formEl.addEventListener("submit", function (e) {
   e.preventDefault();
-  let colorButtonValue = colorbtn.value;
+  let colorButtonValue = colorButton.value;
   let newColorValue = newColor.value.toLowerCase();
 
   if (checkActualColor(newColorValue) === false) {
-    alert("Please enter proper color");
     newColor.value = "";
+    alert("Please enter proper color");
+    renderColor();
     return;
   }
   let btnName = document.querySelector(`.btn-${colorButtonValue}`);
@@ -45,6 +52,7 @@ formEl.addEventListener("submit", function (e) {
   btnName.textContent = newColorValue[0].toUpperCase() + newColorValue.slice(1);
   renderColor();
   btnName.classList.remove(`btn-${colorButtonValue}`);
+
   newColor.value = "";
 });
 
